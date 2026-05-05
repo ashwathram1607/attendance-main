@@ -1,0 +1,61 @@
+{
+  "name": "asscentwareattendance",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "preview:mock": "cross-env VITE_USE_MOCK=true vite preview",
+    "lint": "npm run test:format && npm run test:types && npm run test:lint",
+    "test": "npm run test:format && npm run test:types && npm run test:lint && npm run test:unit",
+    "test:types": "tsc --build --noEmit",
+    "test:unit": "vitest run",
+    "test:format": "npm run format:check",
+    "test:lint": "eslint --format=codeframe --max-warnings=0 ./",
+    "vitest:watch": "vitest watch --test-timeout 0",
+    "format": "prettier --write src/**/*.{ts,tsx,js,jsx}",
+    "format:check": "prettier --check src/**/*.{ts,tsx,js,jsx}",
+    "serve": "vite preview --port 3000",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "dependencies": {
+    "@azure/msal-browser": "^4.23.0",
+    "@azure/msal-react": "^3.0.19",
+    "@tailwindcss/vite": "^4.1.13",
+    "@tanstack/react-query": "^5.90.1",
+    "axios": "^1.13.2",
+    "crypto-js": "^4.2.0",
+    "framer-motion": "^12.23.24",
+    "jspdf": "^3.0.3",
+    "jspdf-autotable": "^5.0.2",
+    "react": "^19.1.1",
+    "react-calendar": "^6.0.0",
+    "react-dom": "^19.1.1",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.9.1",
+    "recharts": "^3.2.1",
+    "tailwindcss": "^4.1.13",
+    "xlsx": "^0.18.5",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.33.0",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^5.0.0",
+    "@vitejs/plugin-react-swc": "^4.0.1",
+    "cypress": "^15.2.0",
+    "eslint": "^9.33.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "vite": "^7.2.0",
+    "vite-plugin-mock-dev-server": "^2.0.1"
+  },
+  "engines": {
+    "node": "20.x"
+  }
+}

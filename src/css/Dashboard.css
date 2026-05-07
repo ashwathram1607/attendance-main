@@ -1,0 +1,41 @@
+/* Main container for scaling */
+.dashboard-container {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  background-color: #f3f4f6; /* Tailwind's gray-100 */
+  min-height: calc(100vh - 70px);
+  overflow-y: auto;
+}
+
+.dashboard-content {
+  width: 100%;
+  max-width: 1600px;
+  transform-origin: top center;
+  transition: transform 0.3s ease, width 0.3s ease;
+}
+
+/* ✅ For laptops and desktops — scale 75% */
+@media (min-width: 1024px) {
+  .dashboard-content {
+    transform: scale(0.75);
+    width: 133.33%; /* compensate for scaling to center properly */
+  }
+}
+
+/* ✅ For very large monitors — slightly larger */
+@media (min-width: 1600px) {
+  .dashboard-content {
+    transform: scale(0.85);
+    width: 117.65%;
+  }
+}
+
+/* ✅ For tablets and mobiles — normal size */
+@media (max-width: 1023px) {
+  .dashboard-content {
+    transform: scale(1);
+    width: 100%;
+  }
+}

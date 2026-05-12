@@ -25,7 +25,7 @@ export default function AdminDashboard() {
   const fetchAttendance = async () => {
     try {
       const res = await axios.get(
-        "https://attendance-backend-snvv.onrender.com/attendance",
+        "https://attendance-backend-mlct.onrender.com/attendance",
       );
       setAttendanceData(res.data);
     } catch (err) {

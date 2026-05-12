@@ -1,8 +1,9 @@
 // src/store/attendanceStore.js
+
 import { create } from "zustand";
 import axios from "axios";
 
-const API = "https://attendance-backend-1-eohz.onrender.com"
+const API = "https://attendance-backend-mlct.onrender.com";
 
 const JSON_HEADERS = {
   headers: { "Content-Type": "application/json" },
@@ -25,6 +26,7 @@ const getISTMs = () => {
   const nowIST = new Date().toLocaleString("en-US", {
     timeZone: "Asia/Kolkata",
   });
+
   return new Date(nowIST).getTime();
 };
 
@@ -111,9 +113,9 @@ export const useAttendanceStore = create((set, get) => ({
 
     try {
       const res = await axios.post(
-        `${API}/check-in`, // ✅ FIXED
+        `${API}/attendance/check-in`,
         { username },
-        JSON_HEADERS,
+        JSON_HEADERS
       );
 
       const data = res.data;
@@ -145,9 +147,9 @@ export const useAttendanceStore = create((set, get) => ({
 
     try {
       const res = await axios.post(
-        `${API}/start-break`,
+        `${API}/attendance/start-break`,
         { username },
-        JSON_HEADERS,
+        JSON_HEADERS
       );
 
       const data = res.data;
@@ -174,9 +176,9 @@ export const useAttendanceStore = create((set, get) => ({
 
     try {
       const res = await axios.post(
-        `${API}/end-break`,
+        `${API}/attendance/end-break`,
         { username },
-        JSON_HEADERS,
+        JSON_HEADERS
       );
 
       const data = res.data;
@@ -211,9 +213,9 @@ export const useAttendanceStore = create((set, get) => ({
 
     try {
       await axios.post(
-        `${API}/check-out`, // ✅ FIXED
+        `${API}/attendance/check-out`,
         { username },
-        JSON_HEADERS,
+        JSON_HEADERS
       );
 
       get()._stopTimer();
@@ -241,11 +243,17 @@ export const useAttendanceStore = create((set, get) => ({
     const username = getUser();
 
     try {
-      const res = await axios.get(`${API}/attendance`);
+      const res = await axios.get(
+        `${API}/attendance`
+      );
 
-      const list = Array.isArray(res.data) ? res.data : res.data.records;
+      const list = Array.isArray(res.data)
+        ? res.data
+        : res.data.records;
 
-      const open = list.find((r) => r.username === username && !r.endTime);
+      const open = list.find(
+        (r) => r.username === username && !r.endTime
+      );
 
       if (!open) return;
 

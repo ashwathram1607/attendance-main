@@ -50,7 +50,7 @@ const PayrollDashboard = () => {
 
   const fetchPayslips = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/payslip");
+      const res = await axios.get("https://attendance-backend-mlct.onrender.com/payslip");
       setPayslips(res.data);
     } catch (err) {
       console.error(err);
@@ -78,7 +78,7 @@ const PayrollDashboard = () => {
   // CONFIRM DELETE
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8000/payslip/${deleteId}`);
+      await axios.delete(`https://attendance-backend-mlct.onrender.com/payslip/${deleteId}`);
       fetchPayslips();
     } catch (err) {
       console.error(err);

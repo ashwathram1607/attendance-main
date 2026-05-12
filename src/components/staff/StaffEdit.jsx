@@ -18,7 +18,7 @@ export default function StaffEdit({ setActivePage }) {
 
   useEffect(() => {
     if (!staffId) return;
-    fetch(`https://attendance-backend-snvv.onrender.com/staff/${staffId}`)
+    fetch(`https://attendance-backend-mlct.onrender.comstaff/${staffId}`)
       .then((res) => res.json())
       .then((data) => setForm(data));
   }, [staffId]);
@@ -30,7 +30,7 @@ export default function StaffEdit({ setActivePage }) {
     e.preventDefault();
     try {
       await fetch(
-        `https://attendance-backend-snvv.onrender.com/staff/${staffId}`,
+        `https://attendance-backend-mlct.onrender.com/staff/${staffId}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },

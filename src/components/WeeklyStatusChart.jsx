@@ -109,7 +109,7 @@ export default function WeeklyStatusChart() {
 
       try {
         const res = await axios.get(
-          "https://attendance-backend-1-eohz.onrender.com/attendance",
+          "https://attendance-backend-mlct.onrender.com/attendance",
         );
         const attendanceData = res.data || [];
 

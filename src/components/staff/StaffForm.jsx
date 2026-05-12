@@ -21,7 +21,7 @@ export default function StaffForm({ setActivePage }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await fetch("https://attendance-backend-snvv.onrender.com/staff", {
+      await fetch("https://attendance-backend-mlct.onrender.com/staff", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

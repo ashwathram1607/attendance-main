@@ -14,7 +14,7 @@ export default function LeaveTable({ onBack }) {
     const fetchLeaves = async () => {
       try {
         const response = await axios.get(
-          "https://attendance-backend-snvv.onrender.com/leaves",
+          "https://attendance-backend-mlct.onrender.com/leaves",
         );
         setLeaveData(response.data);
       } catch (error) {

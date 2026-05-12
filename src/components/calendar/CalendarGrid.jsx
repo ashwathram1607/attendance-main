@@ -48,7 +48,7 @@ export default function CalendarGrid() {
     setError(null);
 
     axios
-      .get("https://attendance-backend-1-eohz.onrender.com/attendance")
+      .get("https://attendance-backend-mlct.onrender.com/attendance")
       .then((res) => {
         if (!Array.isArray(res.data)) {
           setAttendanceData([]);

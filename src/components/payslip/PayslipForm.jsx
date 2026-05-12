@@ -3,7 +3,7 @@ import axios from "axios";
 import { ROUTES } from "../../constants/routes";
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://attendance-backend-mlct.onrender.com";
 
 const months = [
   "January","February","March","April","May","June",
@@ -198,7 +198,7 @@ export default function PayslipForm({ editData }) {
 
     try {
       const payload = {
-        employeeId: String(form.employeeId),
+        employeeId: Number(form.employeeId),
         employeeName: form.employeeName,
         designation: form.designation,
         salary: safeNumber(form.salary),
@@ -206,7 +206,7 @@ export default function PayslipForm({ editData }) {
         panCard: form.panCard || null,
         dateOfJoining: form.dateOfJoining,
         month: form.month,
-        year: String(form.year),
+        year: Number(form.year),
         payableDays: safeNumber(form.payableDays),
         paidDays: safeNumber(form.paidDays),
       };

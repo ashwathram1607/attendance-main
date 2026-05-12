@@ -19,7 +19,7 @@ export default function PermissionRecords({ setActivePage }) {
     const fetchRecords = async () => {
       try {
         const res = await axios.get(
-          "https://attendance-backend-snvv.onrender.com/permission"
+          "https://attendance-backend-mlct.onrender.com/permission"
         );
 
         const filtered = res.data.filter(

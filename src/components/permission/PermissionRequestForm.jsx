@@ -46,7 +46,7 @@ export default function PermissionRequestForm({ setActivePage }) {
 
     try {
       await axios.post(
-        "https://attendance-backend-mlct.onrender.com/permission",
+        "https://attendance-backend-1-pzsj.onrender.com/permission",
         formData,
       );
       setShowSuccess(true);

@@ -25,7 +25,7 @@ export default function AdminDashboard() {
   const fetchAttendance = async () => {
     try {
       const res = await axios.get(
-        "https://attendance-backend-mlct.onrender.com/attendance",
+        "https://attendance-backend-1-pzsj.onrender.com/attendance",
       );
       setAttendanceData(res.data);
     } catch (err) {
@@ -36,7 +36,7 @@ export default function AdminDashboard() {
   const fetchLeaves = async () => {
     try {
       const res = await axios.get(
-        "https://attendance-backend-mlct.onrender.com/leaves",
+        "https://attendance-backend-1-pzsj.onrender.com/leaves",
       );
       setLeaveData(res.data);
     } catch (err) {
@@ -47,7 +47,7 @@ export default function AdminDashboard() {
   const fetchPermissions = async () => {
     try {
       const res = await axios.get(
-        "https://attendance-backend-mlct.onrender.com/permission",
+        "https://attendance-backend-1-pzsj.onrender.com/permission",
       );
       setPermissionData(res.data);
     } catch (err) {
@@ -61,7 +61,7 @@ export default function AdminDashboard() {
       const token = localStorage.getItem("token"); // ✅ get token
 
       const res = await axios.get(
-        "https://attendance-backend-mlct.onrender.com/users",
+        "https://attendance-backend-1-pzsj.onrender.com/users",
         {
           headers: {
             Authorization: `Bearer ${token}`, // ✅ send token

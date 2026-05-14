@@ -11,7 +11,7 @@ export default function BalanceCheck({ setActivePage }) {
     const fetchBalance = async () => {
       try {
         const res = await axios.get(
-          "https://attendance-backend-mlct.onrender.com/leaves/balance/${username}",
+          "https://attendance-backend-1-pzsj.onrender.com/leaves/balance/${username}",
         );
 
         console.log("Balance API Response:", res.data);

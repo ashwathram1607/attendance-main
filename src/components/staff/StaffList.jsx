@@ -27,7 +27,7 @@ export default function StaffList({ setActivePage }) {
 
     try {
       await fetch(
-        `"https://attendance-backend-mlct.onrender.com/staff/${deleteId}`,
+        `https://attendance-backend-1-pzsj.onrender.com/staff/${deleteId}`,
         { method: "DELETE" },
       );
       setDeleteId(null);

@@ -36,7 +36,7 @@ export default function AdminDashboard() {
   const fetchLeaves = async () => {
     try {
       const res = await axios.get(
-        "https://attendance-backend-snvv.onrender.com/leaves",
+        "https://attendance-backend-mlct.onrender.com/leaves",
       );
       setLeaveData(res.data);
     } catch (err) {
@@ -47,7 +47,7 @@ export default function AdminDashboard() {
   const fetchPermissions = async () => {
     try {
       const res = await axios.get(
-        "https://attendance-backend-snvv.onrender.com/permission",
+        "https://attendance-backend-mlct.onrender.com/permission",
       );
       setPermissionData(res.data);
     } catch (err) {
@@ -61,7 +61,7 @@ export default function AdminDashboard() {
       const token = localStorage.getItem("token"); // ✅ get token
 
       const res = await axios.get(
-        "https://attendance-backend-snvv.onrender.com/users",
+        "https://attendance-backend-mlct.onrender.com/users",
         {
           headers: {
             Authorization: `Bearer ${token}`, // ✅ send token

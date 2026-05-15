@@ -9,7 +9,7 @@ export default function StaffList({ setActivePage }) {
   const fetchStaff = async () => {
     try {
       const res = await fetch(
-        "https://attendance-backend-mlct.onrender.com/staff",
+        "https://attendance-backend-1-pzsj.onrender.com/staff",
       );
       const data = await res.json();
       setStaff(data);

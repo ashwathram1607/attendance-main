@@ -3,7 +3,7 @@ import axios from "axios";
 import { ROUTES } from "../../constants/routes";
 import { useNavigate } from "react-router-dom";
 
-const BASE_URL = "https://attendance-backend-1-pzsj.onrender.com/payslip"
+const BASE_URL = "https://attendance-backend-1-pzsj.onrender.com"
 
 const months = [
   "January","February","March","April","May","June",
@@ -77,7 +77,7 @@ export default function PayslipForm({ editData }) {
         const usersData = usersRes.data.map((u) => ({
           id: `user-${u.id}`,
           type: "user",
-          employeeId: u.employeeId,
+          employeeId: u.Id,
           employeeName: `${u.name} (User)`,
           designation: u.designation,
           salary: u.salary || 0,

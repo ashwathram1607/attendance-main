@@ -77,7 +77,7 @@ export default function PayslipForm({ editData }) {
         const usersData = usersRes.data.map((u) => ({
           id: `user-${u.id}`,
           type: "user",
-          employeeId: u.Id,
+          employeeId: u.id,
           employeeName: `${u.name} (User)`,
           designation: u.designation,
           salary: u.salary || 0,

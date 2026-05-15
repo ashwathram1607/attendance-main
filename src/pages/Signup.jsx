@@ -28,7 +28,7 @@ export default function Signup() {
   const signupMutation = useMutation({
     mutationFn: async (data) => {
       const res = await axios.post(
-        "https://attendance-backend-1-eohz.onrender.com",
+        "https://attendance-backend-1-pzsj.onrender.com",
         {
           name: data.Name,
           email: data.Email,

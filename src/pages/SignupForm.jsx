@@ -20,6 +20,7 @@ export default function SignupForm({ handleChange, handleSubmit, formData }) {
         <h2 className="text-2xl font-bold text-center text-gray-800">
           Create Your Account
         </h2>
+
         <p className="text-center text-gray-500 text-sm">
           Please fill in the details below to get started
         </p>
@@ -36,7 +37,7 @@ export default function SignupForm({ handleChange, handleSubmit, formData }) {
             onChange={handleChange}
             value={formData.Name}
             required
-            className="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm"
+            className="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
           />
         </div>
 
@@ -52,7 +53,7 @@ export default function SignupForm({ handleChange, handleSubmit, formData }) {
             onChange={handleChange}
             value={formData.Email}
             required
-            className="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm"
+            className="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
           />
         </div>
 
@@ -68,7 +69,7 @@ export default function SignupForm({ handleChange, handleSubmit, formData }) {
             onChange={handleChange}
             value={formData.Password}
             required
-            className="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm"
+            className="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
           />
         </div>
 
@@ -82,7 +83,7 @@ export default function SignupForm({ handleChange, handleSubmit, formData }) {
             onChange={handleChange}
             value={formData.Role}
             required
-            className="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm"
+            className="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
           >
             <option value="">Select role</option>
             <option value="admin">Admin</option>
@@ -101,7 +102,7 @@ export default function SignupForm({ handleChange, handleSubmit, formData }) {
             placeholder="Enter designation"
             onChange={handleChange}
             value={formData.Designation}
-            className="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm"
+            className="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
           />
         </div>
 
@@ -116,9 +117,10 @@ export default function SignupForm({ handleChange, handleSubmit, formData }) {
             placeholder="Enter employee ID"
             onChange={handleChange}
             value={formData.EmployeeId}
-            className="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm"
+            className="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
           />
         </div>
+
         {/* Date of Joining */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-1">
@@ -130,7 +132,7 @@ export default function SignupForm({ handleChange, handleSubmit, formData }) {
             onChange={handleChange}
             value={formData.DateOfJoining}
             required
-            className="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm"
+            className="w-full border border-gray-300 rounded-xl px-4 py-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
           />
         </div>
 
@@ -144,10 +146,7 @@ export default function SignupForm({ handleChange, handleSubmit, formData }) {
 
         <p className="text-center text-sm text-gray-600 mt-4">
           Already have an account?{" "}
-          <a
-            href="/"
-            className="text-blue-600 font-semibold hover:underline hover:text-blue-700"
-          >
+          <a href="/" className="text-blue-600 font-semibold hover:underline">
             Login here
           </a>
         </p>

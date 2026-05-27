@@ -7,7 +7,14 @@ export default function GeneratePayslip({ data }) {
   const pdfRef = useRef();
   console.log(data);
   if (!data) return <p className="text-center p-10">No payslip data found.</p>;
-  const gross=data.grossSalary
+  const gross = data.grossSalary;
+  const netTransferAmount = data.netSalary;
+  const formattedMonth = data.month
+    ? data.month.charAt(0).toUpperCase() + data.month.slice(1).toLowerCase()
+    : "";
+  const formattedDOJ = data.dateOfJoining
+    ? new Date(data.dateOfJoining).toLocaleDateString("en-GB").replace(/\//g, "-")
+    : "";
 
   const downloadPDF = async () => {
     const element = pdfRef.current;
@@ -98,7 +105,7 @@ export default function GeneratePayslip({ data }) {
                 paddingTop: "2px", // move text slightly upward
               }}
             >
-              Pay Slip for the Month of {data.month} - {data.year}
+              Pay Slip for the Month of {formattedMonth} - {data.year}
             </div>
           </div>
 
@@ -129,7 +136,7 @@ export default function GeneratePayslip({ data }) {
             <div className="h-24 flex flex-col justify-center">
               <span>{data.employeeName}</span>
               <span>{data.panCard}</span>
-              <span>{data.dateOfJoining.split("T")[0]}</span>
+              <span>{formattedDOJ}</span>
             </div>
             <div className="h-24 flex flex-col justify-center">
               <span>Payable Days:</span>
@@ -257,11 +264,7 @@ export default function GeneratePayslip({ data }) {
             <div className="h-10 flex items-center justify-center" style={{ border: "1px solid #000000" }}></div>
             <div className="h-10 flex items-center justify-center" style={{ border: "1px solid #000000" }}></div>
           </div>
-              
-              
-            
           
-
           {/* Net Pay */}
           <div className="grid grid-cols-6">
             <div
@@ -345,7 +348,7 @@ export default function GeneratePayslip({ data }) {
                 paddingLeft: "2px",
               }}
             >
-              {gross}
+              {netTransferAmount}
             </div>
           </div>
           <div className="grid grid-cols-6 text-center">
@@ -357,7 +360,7 @@ export default function GeneratePayslip({ data }) {
                 paddingLeft: "2px",
               }}
             >
-              In Wordss
+              In Words
             </div>
             <div
               className="h-10 col-span-4 flex items-center text-center"
@@ -367,7 +370,7 @@ export default function GeneratePayslip({ data }) {
                 paddingLeft: "2px",
               }}
             >
-              {convertToWords(gross)} Rupees
+              {convertToWords(netTransferAmount)} Rupees
             </div>
           </div>
 

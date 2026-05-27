@@ -29,33 +29,45 @@ export default function NewEmpPayroll() {
     const loadPayslip = async () => {
       try {
         const storedName = localStorage.getItem("name");
+
         if (!storedName) {
           setLoading(false);
           return;
         }
 
+        // ✅ Correct Payroll API
         const res = await axios.get(
-          "https://attendance-backend-mlct.onrender.com"
+          "https://attendance-backend-1-pzsj.onrender.com/payroll"
         );
 
         const cleanStored = storedName.trim().toLowerCase();
 
+        // ✅ Match employee payrolls
         const matched = res.data.filter(
-          (p) => p.employeeName?.trim().toLowerCase() === cleanStored,
+          (p) =>
+            p.employeeName?.trim().toLowerCase() === cleanStored
         );
 
-        setPayslips(matched);
+        // ✅ Sort latest first
+        const sortedPayslips = [...matched].sort((a, b) => {
+          const dateA = new Date(`${a.month} 1, ${a.year}`);
+          const dateB = new Date(`${b.month} 1, ${b.year}`);
 
-        if (matched.length > 0) {
-          matched.sort((a, b) => {
-            const dateA = new Date(`${a.month} 1, ${a.year}`);
-             const dateB = new Date(`${b.month} 1, ${b.year}`);
-            return dateB - dateA; // latest first
-          });
+          return dateB - dateA;
+        });
 
-          setLatestPayslip(matched[0]);
+        setPayslips(sortedPayslips);
 
-          setSelectedYear(matched[0].year);
+        // ✅ Auto select latest payslip
+        if (sortedPayslips.length > 0) {
+          setLatestPayslip(sortedPayslips[0]);
+
+          setSelectedYear(Number(sortedPayslips[0].year));
+
+          setSelectedMonth(
+            sortedPayslips[0].month.charAt(0).toUpperCase() +
+              sortedPayslips[0].month.slice(1).toLowerCase()
+          );
         }
       } catch (err) {
         console.error("Error fetching payslip:", err);
@@ -67,11 +79,29 @@ export default function NewEmpPayroll() {
     loadPayslip();
   }, []);
 
-  const uniqueYears = [...new Set(payslips.map((p) => p.year))].sort();
+  // ✅ Sort years descending
+  const uniqueYears = [
+    ...new Set(payslips.map((p) => Number(p.year))),
+  ].sort((a, b) => b - a);
 
+  // ✅ Safe year change
   const changeYear = (direction) => {
-    setSelectedMonth(null);
-    setSelectedYear((prev) => (direction === "prev" ? prev - 1 : prev + 1));
+    if (!selectedYear) return;
+
+    const currentIndex = uniqueYears.indexOf(selectedYear);
+
+    if (
+      direction === "prev" &&
+      currentIndex < uniqueYears.length - 1
+    ) {
+      setSelectedYear(uniqueYears[currentIndex + 1]);
+      setSelectedMonth(null);
+    }
+
+    if (direction === "next" && currentIndex > 0) {
+      setSelectedYear(uniqueYears[currentIndex - 1]);
+      setSelectedMonth(null);
+    }
   };
 
   if (loading)
@@ -88,10 +118,13 @@ export default function NewEmpPayroll() {
       </div>
     );
 
-  const filteredPayslips = payslips.filter((p) => p.year === selectedYear);
+  const filteredPayslips = payslips.filter(
+    (p) => Number(p.year) === Number(selectedYear),
+  );
 
   const selectedPayslip = filteredPayslips.find(
-    (p) => p.month.toLowerCase() === selectedMonth?.toLowerCase(),
+    (p) =>
+      p.month?.toLowerCase() === selectedMonth?.toLowerCase(),
   );
 
   return (

@@ -287,15 +287,17 @@ export default function WeeklyStatusChart() {
                 entryDate.setHours(0, 0, 0, 0); // normalize
 
                 const isFuture = entryDate > today;
+                const isWeekend = dayIndex === 0 || dayIndex === 6;
 
                 let fillColor;
-                if (isFuture) {
-                  fillColor = INACTIVE_GRAY; // future day
-                } else if (entry.workedDuration > 0) {
-                  fillColor = WEEKDAY_BLUE; // has data → blue
-                } else {
-                  fillColor = WEEKEND_YELLOW; // no data → yellow
-                }
+
+               if (isFuture) {
+               fillColor = "#e5e7eb"; // future → grey
+              } else if (entry.workedDuration > 0) {
+               fillColor = "#7dd3fc"; // check-in → blue
+              } else {
+        fillColor = "#fffa93"; // no check-in → yellow (weekend style)
+          }
 
                 return <Cell key={index} fill={fillColor} />;
               })}
@@ -313,6 +315,10 @@ export default function WeeklyStatusChart() {
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 rounded bg-[#fffa93] border" />
             <span>No Data / Weekend</span>
+            <div className="flex items-center gap-2">
+         <div className="w-4 h-4 rounded bg-[#e5e7eb] border" />
+          <span>Future Dates</span>
+         </div>
           </div>
         </div>
       </div>

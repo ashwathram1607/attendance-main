@@ -69,6 +69,7 @@ export default function AppRouter() {
           <Route path={ROUTES.BALANCECHECK} element={<BalanceCheck />} />
           <Route path={ROUTES.LEAVEDASHBOARD} element={<LeaveDashboard />} />
           <Route path={ROUTES.APPROVED} element={<Approved />} />
+                 
           <Route
             path={ROUTES.PERMISSIONDASHBOARD}
             element={<PermissionDashboard />}

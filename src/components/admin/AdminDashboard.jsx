@@ -4,7 +4,8 @@ import * as XLSX from "xlsx";
 import AttendanceTable from "./AttendanceTable";
 import LeaveTable from "./LeaveTable";
 import PermissionTable from "./PermissionTable";
-import UsersTable from "./UsersTable"; // ✅ IMPORT THIS
+import UsersTable from "./UsersTable"; 
+import AdminLeaveBalance from "./AdminLeaveBalance";
 import { motion } from "framer-motion";
 
 export default function AdminDashboard() {
@@ -12,14 +13,16 @@ export default function AdminDashboard() {
   const [attendanceData, setAttendanceData] = useState([]);
   const [leaveData, setLeaveData] = useState([]);
   const [permissionData, setPermissionData] = useState([]);
-  const [usersData, setUsersData] = useState([]); // ✅ NEW STATE
+  const [usersData, setUsersData] = useState([]);
+  const [balanceData, setBalanceData] = useState([]);
   const [selectedUser, setSelectedUser] = useState("All");
 
   useEffect(() => {
     if (activeTab === "attendance") fetchAttendance();
     if (activeTab === "leaves") fetchLeaves();
     if (activeTab === "permission") fetchPermissions();
-    if (activeTab === "users") fetchUsers(); // ✅ NEW
+    if (activeTab === "users") fetchUsers();
+    if (activeTab === "leaveBalance") fetchBalances();
   }, [activeTab]);
 
   const fetchAttendance = async () => {
@@ -74,6 +77,18 @@ export default function AdminDashboard() {
       console.error("Error fetching users", err);
     }
   };
+  const fetchBalances = async () => {
+  try {
+    const res = await axios.get(
+      "https://attendance-backend-1-pzsj.onrender.com/leaves/balances"
+    );
+
+    setBalanceData(res.data);
+  } catch (err) {
+    console.error("Error fetching leave balances", err);
+  }
+};
+
 
   const uniqueUsers = [
     "All",
@@ -197,6 +212,13 @@ export default function AdminDashboard() {
               color: "from-orange-500 to-red-500",
               tab: "users",
             },
+            {
+
+              title: "Leave Balances",
+              desc: "View and edit employee leave balances.",
+              color: "from-cyan-500 to-blue-500",
+              tab: "leaveBalance",
+             },
           ].map((card, i) => (
             <motion.div
               key={card.title}
@@ -220,6 +242,7 @@ export default function AdminDashboard() {
       </div>
     );
 
+
   // ================= TABS =================
   if (activeTab === "attendance")
     return (
@@ -241,7 +264,17 @@ export default function AdminDashboard() {
       <PermissionTable data={permissionData} onBack={() => setActiveTab("")} />
     );
 
-  // ✅ USERS TAB
   if (activeTab === "users")
     return <UsersTable data={usersData} onBack={() => setActiveTab("")} />;
+
+  if (activeTab === "leaveBalance")
+    return (
+      <AdminLeaveBalance
+        data={balanceData}
+        onBack={() => setActiveTab("")}
+      />
+    );
+
+  return null;
 }
+

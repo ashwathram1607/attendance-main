@@ -4,11 +4,11 @@ import { ROUTES } from "../../constants/routes";
 
 export default function Approved({ setActivePage }) {
   const username = localStorage.getItem("name");
+
   const [leaves, setLeaves] = useState([]);
   const [statusFilter, setStatusFilter] = useState("All");
-
-  // ✅ Pagination state
   const [currentPage, setCurrentPage] = useState(1);
+
   const itemsPerPage = 5;
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function Approved({ setActivePage }) {
         );
 
         const userLeaves = res.data.filter(
-          (leave) => leave.name === username
+          (leave) => leave.name?.toLowerCase() === username?.toLowerCase()
         );
 
         setLeaves(userLeaves);
@@ -28,10 +28,11 @@ export default function Approved({ setActivePage }) {
       }
     };
 
-    if (username) fetchLeaves();
+    if (username) {
+      fetchLeaves();
+    }
   }, [username]);
 
-  // ✅ Filter logic (case-safe)
   const filteredLeaves =
     statusFilter === "All"
       ? leaves
@@ -40,96 +41,117 @@ export default function Approved({ setActivePage }) {
             leave.status?.toLowerCase() === statusFilter.toLowerCase()
         );
 
-  // ✅ Reset page when filter changes
   useEffect(() => {
     setCurrentPage(1);
   }, [statusFilter]);
 
-  // ✅ Pagination logic
   const indexOfLast = currentPage * itemsPerPage;
   const indexOfFirst = indexOfLast - itemsPerPage;
-  const currentLeaves = filteredLeaves.slice(indexOfFirst, indexOfLast);
 
-  const totalPages = Math.ceil(filteredLeaves.length / itemsPerPage);
+  const currentLeaves = filteredLeaves.slice(
+    indexOfFirst,
+    indexOfLast
+  );
 
-  const goToNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-  };
+  const totalPages = Math.ceil(
+    filteredLeaves.length / itemsPerPage
+  );
 
-  const goToPrevPage = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
-  };
-
-  // ✅ Status color helper
   const getStatusColor = (status) => {
     switch (status?.toLowerCase()) {
       case "approved":
-        return "text-green-600";
+        return "text-green-600 font-semibold";
       case "rejected":
-        return "text-red-600";
+        return "text-red-600 font-semibold";
       default:
-        return "text-yellow-600";
+        return "text-yellow-600 font-semibold";
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      {/* Back Button */}
-      <div className="w-full max-w-md mb-6">
-        <button
-          type="button"
-          onClick={() => setActivePage(ROUTES.LEAVEDASHBOARD)}
-          className="bg-gray-500 text-white px-4 py-2 rounded-xl hover:bg-gray-600 transition"
-        >
-          Back
-        </button>
-      </div>
+    <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center">
 
-      <h2 className="text-3xl font-bold text-center text-purple-700 mb-6">
-        Leave Requests - {username}
-      </h2>
+      {/* Header Section */}
+      <div className="w-full max-w-5xl mb-6">
+        <div className="grid grid-cols-3 items-center">
 
-      {/* Filter */}
-      <div className="mb-4 flex justify-end">
-        <label className="mr-2 font-semibold">Filter by Status:</label>
-        <select
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-          className="border border-gray-300 rounded px-2 py-1"
-        >
-          <option value="All">All</option>
-          <option value="Pending">Pending</option>
-          <option value="Approved">Approved</option>
-          <option value="Rejected">Rejected</option>
-        </select>
+          {/* Back Button */}
+          <div>
+            <button
+              onClick={() => setActivePage(ROUTES.LEAVEDASHBOARD)}
+              className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600"
+            >
+              Back
+            </button>
+          </div>
+
+          {/* Heading */}
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-purple-700">
+              Leave Records - {username}
+            </h2>
+          </div>
+
+          {/* Filter */}
+          <div className="flex justify-end">
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="border border-gray-300 rounded-lg px-4 py-2 bg-white"
+            >
+              <option value="All">All Status</option>
+              <option value="Pending">Pending</option>
+              <option value="Approved">Approved</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+          </div>
+
+        </div>
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto bg-white rounded-2xl shadow-lg p-6">
+      <div className="overflow-x-auto bg-white rounded-2xl shadow-lg p-6 w-full max-w-5xl">
         <table className="w-full border border-gray-200">
           <thead>
             <tr className="bg-purple-600 text-white">
-              <th className="p-3 border">#</th>
-              <th className="p-3 border">Leave Type</th>
-              <th className="p-3 border">From Date</th>
-              <th className="p-3 border">To Date</th>
-              <th className="p-3 border">Reason</th>
-              <th className="p-3 border">Status</th>
+              <th className="p-3 border border-gray-200">#</th>
+              <th className="p-3 border border-gray-200">Leave Type</th>
+              <th className="p-3 border border-gray-200">From Date</th>
+              <th className="p-3 border border-gray-200">To Date</th>
+              <th className="p-3 border border-gray-200">Reason</th>
+              <th className="p-3 border border-gray-200">Status</th>
             </tr>
           </thead>
+
           <tbody>
             {currentLeaves.length > 0 ? (
               currentLeaves.map((leave, index) => (
-                <tr key={leave.id} className="hover:bg-purple-50">
-                  <td className="p-3 border">
+                <tr
+                  key={leave.id || index}
+                  className="hover:bg-purple-50"
+                >
+                  <td className="p-3 border border-gray-200 text-center">
                     {indexOfFirst + index + 1}
                   </td>
-                  <td className="p-3 border">{leave.leaveType}</td>
-                  <td className="p-3 border">{leave.fromDate}</td>
-                  <td className="p-3 border">{leave.toDate}</td>
-                  <td className="p-3 border">{leave.reason}</td>
+
+                  <td className="p-3 border border-gray-200">
+                    {leave.leaveType}
+                  </td>
+
+                  <td className="p-3 border border-gray-200">
+                    {leave.fromDate}
+                  </td>
+
+                  <td className="p-3 border border-gray-200">
+                    {leave.toDate}
+                  </td>
+
+                  <td className="p-3 border border-gray-200">
+                    {leave.reason}
+                  </td>
+
                   <td
-                    className={`p-3 border font-semibold ${getStatusColor(
+                    className={`p-3 border border-gray-200 text-center ${getStatusColor(
                       leave.status
                     )}`}
                   >
@@ -139,37 +161,51 @@ export default function Approved({ setActivePage }) {
               ))
             ) : (
               <tr>
-                <td colSpan="6" className="text-center p-4 text-gray-500 italic">
-                  No leaves found.
+                <td
+                  colSpan="6"
+                  className="text-center p-4 text-gray-500 border border-gray-200"
+                >
+                  No leave records found.
                 </td>
               </tr>
             )}
           </tbody>
         </table>
 
-        {/* ✅ Pagination Controls */}
-        <div className="flex justify-between items-center mt-4">
+        {/* Pagination */}
+        <div className="flex justify-center mt-6 gap-2">
           <button
-            onClick={goToPrevPage}
+            onClick={() => setCurrentPage((p) => p - 1)}
             disabled={currentPage === 1}
-            className="px-4 py-2 bg-gray-400 text-white rounded disabled:opacity-50"
+            className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50"
           >
             Prev
           </button>
 
-          <span className="font-semibold">
-            Page {currentPage} of {totalPages || 1}
-          </span>
+          {[...Array(totalPages)].map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentPage(i + 1)}
+              className={`px-3 py-1 rounded ${
+                currentPage === i + 1
+                  ? "bg-purple-600 text-white"
+                  : "bg-gray-200"
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
 
           <button
-            onClick={goToNextPage}
+            onClick={() => setCurrentPage((p) => p + 1)}
             disabled={currentPage === totalPages || totalPages === 0}
-            className="px-4 py-2 bg-purple-600 text-white rounded disabled:opacity-50"
+            className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50"
           >
             Next
           </button>
         </div>
       </div>
+
     </div>
   );
-} 
+}

@@ -9,7 +9,7 @@ export default function PermissionTable({ onBack }) {
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
 
-  // ✅ Use local backend
+  
   const API_BASE = "https://attendance-backend-1-pzsj.onrender.com";
 
   // Fetch all permission requests
@@ -108,36 +108,45 @@ export default function PermissionTable({ onBack }) {
       </h2>
 
       {/* Controls */}
-      <div className="flex flex-wrap justify-center gap-4 mb-6">
-        <button
-          onClick={onBack}
-          className="bg-gray-600 text-white py-2 px-6 rounded-lg hover:bg-gray-700 transition-all"
-        >
-          Back
-        </button>
+      <div className="grid grid-cols-3 items-center mb-6">
+        {/* LEFT - BACK */}
+  <div className="flex justify-start">
+    <button
+      onClick={onBack}
+      className="bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600"
+    >
+      Back
+    </button>
+  </div>
 
-        <select
-          value={selectedUser}
-          onChange={(e) => {
-            setSelectedUser(e.target.value);
-            setCurrentPage(1);
-          }}
-          className="border border-gray-300 rounded-lg py-2 px-4 focus:ring-2 focus:ring-blue-500"
-        >
-          {uniqueUsers.map((user, index) => (
-            <option key={index} value={user}>
-              {user}
-            </option>
-          ))}
-        </select>
+  {/* CENTER - USER DROPDOWN */}
+  <div className="flex justify-center">
+    <select
+      value={selectedUser}
+      onChange={(e) => {
+        setSelectedUser(e.target.value);
+        setCurrentPage(1);
+      }}
+      className="p-2 border border-gray-300 rounded-lg shadow-sm min-w-[220px]"
+    >
+      {uniqueUsers.map((user, index) => (
+        <option key={index} value={user}>
+          {user}
+        </option>
+      ))}
+    </select>
+  </div>
 
-        <button
-          onClick={exportToExcel}
-          className="bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700 transition-all"
-        >
-          Export {selectedUser === "All" ? "All" : selectedUser} Data
-        </button>
-      </div>
+  {/* RIGHT - EXPORT */}
+  <div className="flex justify-end">
+    <button
+      onClick={exportToExcel}
+      className="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700"
+    >
+      Export to Excel
+    </button>
+  </div>
+</div>
 
       {/* Table */}
       <div className="overflow-x-auto bg-white rounded-2xl shadow-lg p-6">

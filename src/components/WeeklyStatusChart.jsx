@@ -130,14 +130,14 @@ export default function WeeklyStatusChart() {
 
         // Initialize week data
         const weekData = {
-          Sun: { workedDuration: 0, breakCount: 0 },
-          Mon: { workedDuration: 0, breakCount: 0 },
-          Tue: { workedDuration: 0, breakCount: 0 },
-          Wed: { workedDuration: 0, breakCount: 0 },
-          Thu: { workedDuration: 0, breakCount: 0 },
-          Fri: { workedDuration: 0, breakCount: 0 },
-          Sat: { workedDuration: 0, breakCount: 0 },
-        };
+      Sun: { workedDuration: 0, breakCount: 0, hasData: false },
+      Mon: { workedDuration: 0, breakCount: 0, hasData: false },
+      Tue: { workedDuration: 0, breakCount: 0, hasData: false },
+      Wed: { workedDuration: 0, breakCount: 0, hasData: false },
+       Thu: { workedDuration: 0, breakCount: 0, hasData: false },
+        Fri: { workedDuration: 0, breakCount: 0, hasData: false },
+        Sat: { workedDuration: 0, breakCount: 0, hasData: false },
+       };
 
         // Group entries by local date
         const groupedByDate = {};
@@ -170,6 +170,7 @@ export default function WeeklyStatusChart() {
           if (weekData[weekday]) {
             weekData[weekday].workedDuration += workedHours;
             weekData[weekday].breakCount += totalBreakCount;
+            weekData[weekday].hasData = true;
           }
         });
 
@@ -293,7 +294,7 @@ export default function WeeklyStatusChart() {
 
                if (isFuture) {
                fillColor = "#e5e7eb"; // future → grey
-              } else if (entry.workedDuration > 0) {
+              } else if (entry.hasData) {
                fillColor = "#7dd3fc"; // check-in → blue
               } else {
         fillColor = "#fffa93"; // no check-in → yellow (weekend style)

@@ -25,10 +25,11 @@ export default function LeaveTable({ onBack }) {
   }, []);
 
   const uniqueUsers = ["All", ...new Set(leaveData.map((leave) => leave.name))];
+  const sortedData=[...leaveData].sort((a,b)=>b.id-a.id);
   const filteredData =
     selectedUser === "All"
-      ? leaveData
-      : leaveData.filter((leave) => leave.name === selectedUser);
+      ? sortedData
+      : sortedData.filter((leave) => leave.name === selectedUser);
 
   // Pagination logic
   const totalPages = Math.ceil(filteredData.length / rowsPerPage);

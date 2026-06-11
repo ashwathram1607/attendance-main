@@ -186,16 +186,16 @@ const PayrollDashboard = () => {
             editData={editPayslip}
             onSuccess={async () => {
 
-              // ✅ Refresh latest data
+              //  Refresh latest data
               await fetchPayslips();
 
-              // ✅ Stay same page
+              //  Stay same page
               setShowForm(false);
 
-              // ✅ Clear edit state
+              // Clear edit state
               setEditPayslip(null);
 
-              // ✅ Success popup
+              //  Success popup
               setDialogMessage(
                 editPayslip
                   ? "Payslip updated successfully"

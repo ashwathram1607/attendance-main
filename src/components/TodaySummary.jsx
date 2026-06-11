@@ -75,20 +75,20 @@ export default function TodaySummary() {
             {isCheckedIn ? "Checked In" : "Not Checked In"}
           </div>
 
-          <div className="flex justify-between text-center">
-            <div className="flex flex-col items-center gap-1 w-1/2">
-              <span className="text-green-700 font-bold text-xl sm:text-2xl md:text-3xl">
+          <div className="grid grid-cols-2 gap-8 text-center">
+            <div className="flex flex-col items-center justify-between min-h-[90px]">
+              <span className="text-green-700 font-bold text-lg sm:text-xl md:text-2xl whitespace-nowrap">
                 {startTime ? new Date(startTime).toLocaleTimeString() : "--:--"}
               </span>
-              <span className="text-gray-700 text-sm sm:text-base md:text-lg">
+              <span className="text-gray-700 text-sm sm:text-base md:text-lg mt-2">
                 Start
               </span>
             </div>
-            <div className="flex flex-col items-center gap-1 w-1/2">
-              <span className="text-red-700 font-bold text-xl sm:text-2xl md:text-3xl">
+            <div className="flex flex-col items-center justify-between min-h-[90px]">
+              <span className="text-red-700 font-bold text-lg sm:text-xl md:text-2xl whitespace-nowrap">
                 {isCheckedIn ? "Now" : "--:--"}
               </span>
-              <span className="text-gray-700 text-sm sm:text-base md:text-lg">
+              <span className="text-gray-700 text-sm sm:text-base md:text-lg mt-2">
                 End
               </span>
             </div>

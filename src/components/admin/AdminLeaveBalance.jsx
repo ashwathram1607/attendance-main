@@ -26,10 +26,11 @@ export default function AdminLeaveBalance({
   ].sort();
 
   // FILTER LOGIC
+const sortedBalances = [...balances].sort((a, b) => b.id - a.id);
   const filteredBalances =
     selectedUser === "All"
-      ? balances
-      : balances.filter(
+      ? sortedBalances
+      : sortedBalances.filter(
           (b) => b.name === selectedUser
         );
 

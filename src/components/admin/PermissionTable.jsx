@@ -27,11 +27,16 @@ export default function PermissionTable({ onBack }) {
   }, []);
 
   const uniqueUsers = ["All", ...new Set(permissionData.map((p) => p.name))];
-  const filteredData =
-    selectedUser === "All"
-      ? permissionData
-      : permissionData.filter((p) => p.name === selectedUser);
-
+ const sortData=[...permissionData].sort((a,b)=>{
+  const dateA = new Date(`${a.date} ${a.startTime || "00:00"}`);
+  const dateB = new Date(`${b.date} ${b.startTime || "00:00"}`);
+   return dateB - dateA;
+   });
+   const filteredData=
+   selectedUser=="All"
+   ? sortData
+   :sortData.filter((p)=>p.name==selectedUser);
+ 
   // Pagination logic
   const totalPages = Math.ceil(filteredData.length / rowsPerPage);
   const paginatedData = filteredData.slice(

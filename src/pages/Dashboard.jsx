@@ -8,7 +8,7 @@ import EmpSidebar from "../components/sidebar/EmpSidebar";
 import WeeklyStatusChart from "../components/WeeklyStatusChart";
 import { ROUTES } from "../constants/routes";
 import CalendarGrid from "../components/calendar/CalendarGrid";
-import MiniCalender from "../components/calendar/MiniCalender";
+import MonthlyCalendar from "../components/calendar/MonthlyCalender";
 import LeaveRequestForm from "./LeaveRequestForm";
 import PermissionRequestForm from "../components/permission/PermissionRequestForm";
 import BalanceCheck from "../components/leave/BalanceCheck";
@@ -84,7 +84,7 @@ export default function Dashboard() {
                     <WeeklyStatusChart />
                   </div>
                   <div className="col-span-1 sm:col-span-2 lg:col-span-4 bg-white p-6 rounded-xl shadow-md flex flex-col pointer-events-none">
-                    <CalendarGrid />
+                    <MonthlyCalendar />
                   </div>
                 </>
               )}

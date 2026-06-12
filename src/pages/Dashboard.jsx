@@ -8,7 +8,7 @@ import EmpSidebar from "../components/sidebar/EmpSidebar";
 import WeeklyStatusChart from "../components/WeeklyStatusChart";
 import { ROUTES } from "../constants/routes";
 import CalendarGrid from "../components/calendar/CalendarGrid";
-
+import MiniCalender from "../components/calendar/MiniCalender";
 import LeaveRequestForm from "./LeaveRequestForm";
 import PermissionRequestForm from "../components/permission/PermissionRequestForm";
 import BalanceCheck from "../components/leave/BalanceCheck";

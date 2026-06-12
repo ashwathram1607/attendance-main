@@ -14,7 +14,7 @@ import {
 } from "recharts";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
-// 🎨 Color codes
+//  Color codes
 const WEEKDAY_BLUE = "#7dd3fc"; // has data
 const WEEKEND_YELLOW = "#fffa93"; // no data
 const INACTIVE_GRAY = "#e5e7eb"; // future

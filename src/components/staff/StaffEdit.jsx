@@ -18,7 +18,7 @@ export default function StaffEdit({ setActivePage }) {
 
   useEffect(() => {
     if (!staffId) return;
-    fetch('https://attendance-backend-1-pzsj.onrender.com/staff/${staffId}')
+    fetch(`https://attendance-backend-1-pzsj.onrender.com/staff/${staffId}`)
       
       .then((res) => res.json())
       .then((data) => setForm(data));
@@ -36,7 +36,7 @@ export default function StaffEdit({ setActivePage }) {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(form),
-        },
+        }
       );
 
       setShowSuccess(true);
@@ -80,6 +80,7 @@ export default function StaffEdit({ setActivePage }) {
                 name={field.name}
                 value={form[field.name]}
                 onChange={handleChange}
+                placeholder={field.name=="dateofJoining"? "DD-MM-YYY":""}
                 required
                 className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
               />

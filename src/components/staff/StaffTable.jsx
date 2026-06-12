@@ -47,10 +47,15 @@ export default function StaffTable({ data, onEdit, onDelete }) {
                 <td className="p-3 border-b">{staff.designation}</td>
                 <td className="p-3 border-b">{staff.salary}</td>
                 <td className="p-3 border-b">{staff.pancard}</td>
-                <td className="p-3 border-b">{staff.dateOfJoining}</td>
+                <td className="p-3 border-b">
+                  {staff.dateOfJoining
+                    ? new Date(staff.dateOfJoining)
+                        .toLocaleDateString("en-GB")
+                        .replace(/\//g, "-")
+                    : ""}
+                </td>
                 <td className="p-3 border-b">{staff.location}</td>
-
-                <td className="p-3 border-b flex gap-2 justify-center">
+                <td className="p-3 border-b text-center space-x-2">
                   <button
                     className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-lg transition"
                     onClick={() => onEdit(staff)}

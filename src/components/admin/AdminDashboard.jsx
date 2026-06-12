@@ -194,7 +194,7 @@ export default function AdminDashboard() {
               tab: "users",
             },
             {
-              title: "Leave Balances",
+              title:  "Leave Balances",
               desc: "View and edit employee leave balances.",
               color: "from-cyan-500 to-blue-500",
               tab: "leaveBalance",

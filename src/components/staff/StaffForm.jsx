@@ -63,6 +63,7 @@ export default function StaffForm({ setActivePage }) {
                 name={field.name}
                 value={form[field.name]}
                 onChange={handleChange}
+                placeholder={field.name=="dateofJoining"? DD-MM-YYY:""}
                 required
                 className="w-full p-3 border rounded-xl"
               />

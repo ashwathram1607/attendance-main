@@ -45,7 +45,7 @@ const EmpSidebar = ({ isOpen, onNavigate, activePage }) => {
       {/* Calendar */}
       <EmpSidebarItem
         icon={<FaRegCalendarAlt />}
-        label="Calendar"
+        label=" Attendance Calendar"
         onClick={() => onNavigate(ROUTES.CALENDARGRID)}
         active={activePage === ROUTES.CALENDARGRID}
       />

@@ -21,7 +21,7 @@ export default function StaffTable({ data, onEdit, onDelete }) {
               Date of Joining
             </th>
             <th className="p-3 text-left border-b border-gray-300">Location</th>
-            <th className="p-3 text-center border-b border-gray-300">
+            <th className="p-3 text-center border-b border-gray-300 min-w-[150px]">
               Actions
             </th>
           </tr>
@@ -55,7 +55,9 @@ export default function StaffTable({ data, onEdit, onDelete }) {
                     : ""}
                 </td>
                 <td className="p-3 border-b">{staff.location}</td>
-                <td className="p-3 border-b text-center space-x-2">
+                <td className="p-3 border-b text-center min-w-[150px]">
+                  <div className="flex justify-center items-center gap-8">
+
                   <button
                     className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-lg transition"
                     onClick={() => onEdit(staff)}
@@ -69,6 +71,7 @@ export default function StaffTable({ data, onEdit, onDelete }) {
                   >
                     Delete
                   </button>
+                  </div>
                 </td>
               </tr>
             ))
@@ -76,5 +79,6 @@ export default function StaffTable({ data, onEdit, onDelete }) {
         </tbody>
       </table>
     </div>
+    
   );
 }

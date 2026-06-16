@@ -18,8 +18,8 @@ const ForgotPassword = () => {
 
       setMessage(res.data.message || "Reset email sent!");
     } catch (error: any) {
-      console.log(error); // 👈 add this
-      console.log(error.response); // 👈 and this
+      console.log(error); 
+      console.log(error.response);
       setMessage(error?.response?.data?.message || "Something went wrong");
     }
   };

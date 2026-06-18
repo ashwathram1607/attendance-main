@@ -5,8 +5,9 @@ import AttendanceTable from "./AttendanceTable";
 import LeaveTable from "./LeaveTable";
 import PermissionTable from "./PermissionTable";
 import UsersTable from "./UsersTable";
-import AdminLeaveBalance from "./AdminLeaveBalance"; // ✅ already used
-import { motion } from "framer-motion";
+import AdminLeaveBalance from "./AdminLeaveBalance";
+import Signup from "../../pages/Signup";
+import { color, motion } from "framer-motion";
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("");
@@ -14,7 +15,7 @@ export default function AdminDashboard() {
   const [leaveData, setLeaveData] = useState([]);
   const [permissionData, setPermissionData] = useState([]);
   const [usersData, setUsersData] = useState([]);
-  const [balanceData, setBalanceData] = useState([]); // ✅ ADDED
+  const [balanceData, setBalanceData] = useState([]);
   const [selectedUser, setSelectedUser] = useState("All");
 
   const BASE_URL = "https://attendance-backend-1-pzsj.onrender.com";
@@ -25,7 +26,7 @@ export default function AdminDashboard() {
     if (activeTab === "leaves") fetchLeaves();
     if (activeTab === "permission") fetchPermissions();
     if (activeTab === "users") fetchUsers();
-    if (activeTab === "leaveBalance") fetchBalances(); // ✅ ADDED
+    if (activeTab === "leaveBalance") fetchBalances(); 
   }, [activeTab]);
 
   // ================= ATTENDANCE =================
@@ -170,6 +171,13 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 w-full max-w-5xl z-10">
           {[
             {
+              title:"Signup",
+              desc:"Create new employee or admin accounts",
+              color: "from-emerald-800 to-amber-500",
+              tab:"signup",
+            },
+          
+            {
               title: "Attendance Records",
               desc: "View and export employee attendance data.",
               color: "from-blue-500 to-indigo-500",
@@ -199,6 +207,8 @@ export default function AdminDashboard() {
               color: "from-cyan-500 to-blue-500",
               tab: "leaveBalance",
             },
+            
+            
           ].map((card, i) => (
             <motion.div
               key={card.title}
@@ -223,6 +233,8 @@ export default function AdminDashboard() {
     );
 
   // ================= TABS =================
+  if (activeTab=="signup")
+    return <Signup/>
   if (activeTab === "attendance")
     return (
       <AttendanceTable
@@ -248,7 +260,6 @@ export default function AdminDashboard() {
       <UsersTable data={usersData} onBack={() => setActiveTab("")} />
     );
 
-  // ✅ ADDED (NO DESIGN CHANGE)
   if (activeTab === "leaveBalance")
     return (
       <AdminLeaveBalance
@@ -256,6 +267,8 @@ export default function AdminDashboard() {
         onBack={() => setActiveTab("")}
       />
     );
+    if (activeTab === "signup")
+  return <SignupForm onBack={() => setActiveTab("")} />;
 
   return null;
 }

@@ -12,7 +12,21 @@ export default function PermissionRecords({ setActivePage }) {
 
   const username = localStorage.getItem("name");
 
-  // ✅ Fetch permission records and auto-refresh every 5 seconds
+  // ✅ FORMAT DATE FUNCTION
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "";
+
+    const date = new Date(dateStr);
+    if (isNaN(date)) return dateStr;
+
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  };
+
+  // Fetch permission records
   useEffect(() => {
     if (!username) return;
 
@@ -36,13 +50,13 @@ export default function PermissionRecords({ setActivePage }) {
       }
     };
 
-    fetchRecords(); // initial fetch
-    const interval = setInterval(fetchRecords, 5000); // refresh every 5 seconds
+    fetchRecords();
+    const interval = setInterval(fetchRecords, 5000);
 
-    return () => clearInterval(interval); // cleanup on unmount
+    return () => clearInterval(interval);
   }, [username]);
 
-  // ✅ Pagination Logic
+  // Pagination
   const indexOfLast = currentPage * recordsPerPage;
   const indexOfFirst = indexOfLast - recordsPerPage;
   const currentData = records.slice(indexOfFirst, indexOfLast);
@@ -57,6 +71,7 @@ export default function PermissionRecords({ setActivePage }) {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center">
+
       {/* Back Button */}
       <div className="w-full max-w-5xl mb-6">
         <button
@@ -94,12 +109,16 @@ export default function PermissionRecords({ setActivePage }) {
                   <td className="p-3 border border-gray-200">
                     {indexOfFirst + index + 1}
                   </td>
-                  <td className="p-3 border border-gray-200">{r.date}</td>
+
+                  {/* ✅ FIXED DATE */}
+                  <td className="p-3 border border-gray-200">
+                    {formatDate(r.date)}
+                  </td>
+
                   <td className="p-3 border border-gray-200">{r.startTime}</td>
                   <td className="p-3 border border-gray-200">{r.endTime}</td>
                   <td className="p-3 border border-gray-200">{r.reason}</td>
 
-                  {/* STATUS COLUMN */}
                   <td
                     className={`p-3 border border-gray-200 font-semibold ${
                       (r.status || "Pending") === "Approved"
@@ -115,10 +134,7 @@ export default function PermissionRecords({ setActivePage }) {
               ))
             ) : (
               <tr>
-                <td
-                  colSpan="6"
-                  className="text-center p-4 text-gray-500 border border-gray-200"
-                >
+                <td colSpan="6" className="text-center p-4 text-gray-500">
                   No permission records found.
                 </td>
               </tr>

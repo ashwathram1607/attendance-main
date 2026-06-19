@@ -8,7 +8,15 @@ export default function PermissionTable({ onBack }) {
   const [editingPermission, setEditingPermission] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 10;
-
+  const formatDate = (dateStr) => {
+ if (!dateStr) return "";
+const date = new Date(dateStr);
+if (isNaN(date)) return dateStr;
+ const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
+  }
   
   const API_BASE = "https://attendance-backend-1-pzsj.onrender.com";
 
@@ -174,7 +182,7 @@ export default function PermissionTable({ onBack }) {
                 <tr key={p.id} className="hover:bg-blue-50">
                   <td className="p-3 border border-gray-200">{p.id}</td>
                   <td className="p-3 border border-gray-200">{p.name}</td>
-                  <td className="p-3 border border-gray-200">{p.date}</td>
+                  <td className="p-3 border border-gray-200">{formatDate(p.date)}</td>
                   <td className="p-3 border border-gray-200">{p.startTime}</td>
                   <td className="p-3 border border-gray-200">{p.endTime}</td>
                   <td className="p-3 border border-gray-200">{p.reason}</td>

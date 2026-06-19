@@ -68,8 +68,8 @@ const EmpSidebar = ({ isOpen, onNavigate, activePage }) => {
           <EmpSidebarItem
             icon={<FaMoneyCheckAlt />}
             label="Payroll"
-            onClick={() => onNavigate(ROUTES.PAYROLL)}
-            active={activePage === ROUTES.PAYROLL_DASHBOARD}
+            onClick={() => onNavigate(ROUTES.PAYROLL_DASHBOARD)}
+            active={activePage === ROUTES.PAYROLL}
           />
         </>
       )}

@@ -71,7 +71,7 @@ export default function GeneratePayslip({ data }) {
           className="border-2 mt-10"
           style={{
             borderColor: "#000000",
-            height: "767px",
+            height: "auto",
             letterSpacing: "1px",
           }}
         >
@@ -108,45 +108,43 @@ export default function GeneratePayslip({ data }) {
               Pay Slip for the Month of {formattedMonth} - {data.year}
             </div>
           </div>
-
           {/* EMPLOYEE DETAILS */}
-          <div
-            className="grid grid-cols-6 gap-4"
-            style={{
-              border: "1px solid #000000",
-              letterSpacing: "1px",
-              paddingLeft: "2px",
-            }}
-          >
-            <div className="h-24 flex flex-col justify-center pb-3 ">
-              <span>Employee ID:</span>
-              <span>Designation:</span>
-              <span>Location:</span>
-            </div>
-            <div className="h-24 flex flex-col justify-center pb-3">
-              <span>{data.employeeId}</span>
-              <span>{data.designation}</span>
-              <span>Chennai</span>
-            </div>
-            <div className="h-24 flex flex-col justify-center">
-              <span>Name:</span>
-              <span>PAN:</span>
-              <span>Date of Joining:</span>
-            </div>
-            <div className="h-24 flex flex-col justify-center">
-              <span>{data.employeeName}</span>
-              <span>{data.panCard}</span>
-              <span>{formattedDOJ}</span>
-            </div>
-            <div className="h-24 flex flex-col justify-center">
-              <span>Payable Days:</span>
-              <span>Paid days:</span>
-            </div>
-            <div className="h-24 flex flex-col justify-center">
-              <span>{data.payableDays}</span>
-              <span>{data.paidDays}</span>
-            </div>
-          </div>
+          <div className="grid grid-cols-6 border border-black text-[14px]">
+            {/* Column 1 */}
+            <div className="flex flex-col justify-center gap-2 p-2 border-r border-black">
+              <span>Employee ID :</span>
+              <span>Designation :</span>
+              <span>Location :</span>
+              </div>
+               {/* Column 2 */}
+               <div className="flex flex-col justify-center gap-2 p-2 border-r border-black">
+                <span>{data.employeeId}</span>
+                <span>{data.designation}</span>
+                <span>Chennai</span>
+                 </div>
+                 {/* Column 3 */}
+                  <div className="flex flex-col justify-center gap-2 p-2 border-r border-black">
+                    <span>Name :</span>
+                    <span>PAN :</span>
+                     <span>Date of Joining :</span>
+                      </div>
+                      {/* Column 4 */}
+                      <div className="flex flex-col justify-center gap-2 p-2 border-r border-black">
+                        <span>{data.employeeName}</span>
+                        <span>{data.panCard}</span>
+                        <span>{formattedDOJ}</span>
+                         </div>
+                         {/* Column 5 */}
+                         <div className="flex flex-col justify-center gap-2 p-2 border-r border-black">
+                          <span>Payable Days :</span>
+                          <span>Paid Days :</span>
+                          </div>
+                          {/* Column 6 */}
+                          <div className="flex flex-col justify-center gap-2 p-2">
+                            <span>{data.payableDays}</span>
+                            <span>{data.paidDays}</span>
+                            </div>
+                            </div>
 
           {/* Earnings/Deductions Table */}
           <div className="grid grid-cols-6">
@@ -291,7 +289,7 @@ export default function GeneratePayslip({ data }) {
                 paddingLeft: "2px",
               }}
             >
-              {convertToWords(data.netSalary)}Rupees
+              {convertToWords(data.netSalary)} Rupees
             </div>
           </div>
           <div className="grid grid-cols-6 text-center">
@@ -382,6 +380,8 @@ export default function GeneratePayslip({ data }) {
                 border: "1px solid #000000",
                 lineHeight: "34px",
                 letterSpacing: "1px",
+                paddingTop:"4px",
+                textDecoration:"none",
               }}
             >
               This is a computer generated document, hence no signature is
@@ -393,6 +393,7 @@ export default function GeneratePayslip({ data }) {
     </div>
   );
 }
+
 
 /* Convert number to words */
 function convertToWords(num) {

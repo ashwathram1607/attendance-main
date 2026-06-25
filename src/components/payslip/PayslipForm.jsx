@@ -222,7 +222,10 @@ export default function PayslipForm({ editData }) {
       setShowDialog(true);
     } catch (err) {
       console.error(err);
-      setDialogMessage("Something went wrong!");
+      setDialogMessage(
+        err?.response?.data?.message||
+        "Something went wrong!"
+      );
       setShowDialog(true);
     }
   };

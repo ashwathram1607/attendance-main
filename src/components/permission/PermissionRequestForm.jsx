@@ -120,7 +120,7 @@ export default function PermissionRequestForm({ setActivePage }) {
             name="date"
             value={formData.date}
             onChange={handleChange}
-            max={getTodayDate()}
+            min={getTodayDate()}
             className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white"
           />
         </div>

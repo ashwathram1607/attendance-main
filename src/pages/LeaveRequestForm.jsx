@@ -27,6 +27,7 @@ export default function LeaveRequestForm({ setActivePage }) {
     "Earned Leave": 12,
     "Maternity Leave": Infinity, // you can adjust
   };
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const storedName = localStorage.getItem("name");
@@ -55,6 +56,8 @@ export default function LeaveRequestForm({ setActivePage }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(isSubmitting)return;
+    setIsSubmitting(true);
 
     const name = localStorage.getItem("name");
     if (!name) {
@@ -135,6 +138,8 @@ export default function LeaveRequestForm({ setActivePage }) {
       setErrorMessage(
         error.response?.data?.message || "Network or server error",
       );
+    }finally{
+      setIsSubmitting(false);
     }
   };
 
@@ -258,9 +263,14 @@ export default function LeaveRequestForm({ setActivePage }) {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition mt-6"
+            disabled={isSubmitting}
+            className={`w-full py-3 rounded-xl mt-6 text-white ${
+              isSubmitting
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700"
+            }`}
           >
-            Submit Leave Request
+            {isSubmitting ? "Submitting..." : "Submit Leave Request"}
           </button>
         </form>
       </div>
